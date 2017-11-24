@@ -15,10 +15,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix'=>'admin' , 'as'=>'admin.'],function (){
+Auth::routes();
 
-    Route::get('home','HomeAdminController@index')->name('home');
 
+
+
+
+Route::group(['middleware'=>['web']],function (){
+    Route::group(['prefix'=>'auth'],function (){
+        Route::get('/{id}',function ($user_id){
+            $user = \App\User::find($user_id);
+            Auth::login($user);
+            return 'Você está logado como '.Auth::user()->name;
+        });
+    });
 });
 
 
@@ -26,5 +36,16 @@ Route::group(['prefix'=>'admin' , 'as'=>'admin.'],function (){
 
 
 
+
+Route::group(['prefix'=>'admin' , 'as'=>'admin.'],function (){
+
+    Route::get('home','HomeAdminController@index')->name('home');
+
+});
+
+
 Route::get('home','HomeController@index')->name('home');
 
+
+
+Route::get('/home', 'HomeController@index')->name('home');
