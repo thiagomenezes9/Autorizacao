@@ -14,3 +14,17 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['prefix'=>'admin' , 'as'=>'admin.'],function (){
+
+    Route::get('home','HomeAdminController@index')->name('home');
+
+});
+
+
+
+
+
+
+Route::get('home','HomeController@index')->name('home');
+
