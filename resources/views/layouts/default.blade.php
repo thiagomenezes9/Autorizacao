@@ -43,6 +43,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contact</a>
                 </li>
+                @if(!\Illuminate\Support\Facades\Auth::guest())
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="#">{{\Illuminate\Support\Facades\Auth::user()->name}}</a>
+                    </li>
+                    @endif
             </ul>
         </div>
     </div>
@@ -54,8 +60,7 @@
     <div class="row">
 
         <!-- Blog Entries Column -->
-        <div class="col-md-8">
-
+        <div class="col-md-12">
 
 
             @yield('content')
