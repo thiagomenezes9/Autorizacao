@@ -20,7 +20,7 @@
         <tr>
             <td><b>{{$post->title}}</b><br>{{$post->content}}</td>
             <td>
-                @if(\Illuminate\Support\Facades\Auth::user() === $post->user->id)
+                @if(\Illuminate\Support\Facades\Auth::user()->id === $post->user->id)
                 <a href="#" class="btn btn-default">Editar</a>
                     @endif
             </td>
