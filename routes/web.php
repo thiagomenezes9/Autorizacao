@@ -38,13 +38,14 @@ Route::group(['middleware'=>['web']],function (){
 
 
 Route::group(['prefix'=>'admin' , 'as'=>'admin.'],function (){
+    Route::group(['middleware'=>'can:admin'],function (){
 
     Route::get('home','HomeAdminController@index')->name('home');
-
+        });
 });
 
 
 
 
 
-Route::get('/post', 'PostController@index')->name('home');
+Route::resource('posts', 'PostController');

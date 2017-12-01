@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class PostController extends Controller
 {
@@ -58,7 +60,16 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+
+        try{
+            $this->authorize('edit', $post);
+        }catch (\Exception $exception){
+//            return 'vc nao pode';
+            abort(500);
+        }
+
+            return 'Voce pode editar esse post';
+
     }
 
     /**
